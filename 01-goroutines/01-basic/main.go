@@ -16,8 +16,6 @@ func main() {
 	// Direct call
 	fun("direct call")
 
-	// TODO: write goroutine with different variants for function call.
-
 	// goroutine function call
 	go fun("Test 1")
 
