@@ -63,3 +63,23 @@ Open-sourced software licensed under the [MIT license](http://opensource.org/lic
 - Go runtime creates OS threads.
 - Goroutines runs in the context of OS threads.
 - Many Goroutines can execute in a context of single OS threads.
+
+-----------
+
+## WaitGroups:
+- Go follows a logical concurrency model called **Fork and Join**.
+- Go statement `Forks` a Goroutine. When a Goroutine is `done` with it's job, it `Joins` back to the `main routine`. If `main routine` doesn't wait for the Goroutine, then it is highly likely that a program will finish before the Goroutine gets a chance to run.
+- To create a `Join` point, we can use `sync.WaitGroup`.
+- **Waitgroups deterministically blocks the main goroutine.**
+- E.g.
+    ```go
+    var wg sync.WaitGroup
+    wg.Add(1)
+
+    go func() {
+        defer wg.Done()
+        // Do stuff..
+    }
+
+    wg.Wait()
+    ```
