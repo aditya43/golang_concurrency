@@ -35,3 +35,12 @@ Open-sourced software licensed under the [MIT license](http://opensource.org/lic
         - `Stack` is used for storing `Local Variables in Function`.
 - **Operating System:**
     * The job of operating system is to give fair chance for all processes to access CPU, memory and other resources. There are times when higher priority tasks get precedence.
+- **Threads:**
+    * `Threads` are **smallest unit of execution** that CPU accepts.
+    * Each `Process` has atleast one thread. That is `main thread`.
+    * `Process` can have multiple `Threads`.
+    * `Threads` share the same address space.
+    * Each `Thread` has it's own `Stack`.
+    * `Threads` run **independent of each other**.
+    * **Operating System Scheduler makes scheduling decisions at thread level and not at the process level!**
+    * `Threads` can run concurrently (with each thread taking turn on individual core) or in parallel (with each thread running on different cores at the same time).
