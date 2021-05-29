@@ -20,3 +20,18 @@ Open-sourced software licensed under the [MIT license](http://opensource.org/lic
 - `Concurrency` is about **dealing with lots of things at once**.
 - `Parallelism` is about **doing lots of things at once**.
 - `Concurrency` is about **structure** and `Parallelism` is about **execution**.
+
+-----------
+
+## Processes And Threads 101:
+- **Process:**
+    * `Process` is just an instance of a running program.
+    * `Process` provides environment for program to execute.
+    * When the program is executed, the Operating System creates a process and :
+        - Allocates memory in a virtual address space.
+        - The virtual address space will contain Code Segment which is a compiled machine code.
+        - There is a `Data Region` which contains Global Variables.
+        - `Heap Segment` is used for `Dynamic Memory Allocation`.
+        - `Stack` is used for storing `Local Variables in Function`.
+- **Operating System:**
+    * The job of operating system is to give fair chance for all processes to access CPU, memory and other resources. There are times when higher priority tasks get precedence.
