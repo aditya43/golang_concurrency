@@ -49,3 +49,17 @@ Open-sourced software licensed under the [MIT license](http://opensource.org/lic
     * Sharing of memory between threads creates lot of complexity.
     * Concurrent access to to shared memory by two or more threads can lead to **Data Race** and outcome can be **Un-deterministic**.
     * The actual number of threads we can create are limited.
+
+-----------
+
+## Goroutines:
+- We can think of Goroutines as **user space threads managed by Go runtime**.
+- Goroutines are extremely lightweight. Goroutines starts with **2kb of stack**, which grows and shrinks as required.
+- **Low CPU Overhead**: 3 instructions per function call.
+- Can **create hundreds of thousands of goroutines** in the same address space.
+- **Channels are used for communication of data** between Goroutines. Sharing of memory can be avoided.
+- `Context Switching` between Goroutines is much cheaper than thread `Context Switching`.
+- Go runtime can be more selective in what is persisted for retrieval, how it is persisted and when the persisting needs to occur.
+- Go runtime creates OS threads.
+- Goroutines runs in the context of OS threads.
+- Many Goroutines can execute in a context of single OS threads.
