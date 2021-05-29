@@ -84,8 +84,21 @@ Open-sourced software licensed under the [MIT license](http://opensource.org/lic
     wg.Wait()
     ```
 
-    -----------
+-----------
 
-    ## Goroutines And Closures:
-    - Goroutines execute within the **same address space** they are created in.
-    - Goroutines can directly modify variables in the enclosing lexical block.
+## Goroutines And Closures:
+- Goroutines execute within the **same address space** they are created in.
+- Goroutines can directly modify variables in the enclosing lexical block.
+
+-----------
+
+## Go Scheduler:
+- Go runtime has mechanism known as **MN Scheduler**.
+- Fo Scheduler runs in user space.
+- Go Scheduler uses OS threads to schedule Goroutines for execution.
+- **Goroutine runs in the context of OS threads.**
+- Go runtime creates number of worker OS threads, equals to **`GOMAXPROCS` environment variable value**.
+- **`GOMAXPROCS` default value is number of processors/cores on machine.**
+- It is a responsibility of Go Scheduler to distribute runnable Goroutines on over multiple OS threads that are created.
+
+-----------
