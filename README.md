@@ -83,3 +83,9 @@ Open-sourced software licensed under the [MIT license](http://opensource.org/lic
 
     wg.Wait()
     ```
+
+    -----------
+
+    ## Goroutines And Closures:
+    - Goroutines execute within the **same address space** they are created in.
+    - Goroutines can directly modify variables in the enclosing lexical block.
