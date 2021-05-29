@@ -20,6 +20,7 @@ Open-sourced software licensed under the [MIT license](http://opensource.org/lic
 - `Concurrency` is about **dealing with lots of things at once**.
 - `Parallelism` is about **doing lots of things at once**.
 - `Concurrency` is about **structure** and `Parallelism` is about **execution**.
+- `Memory Access Synchronization` tools reduce `Parallelism` and comes with their own limitations.
 
 -----------
 
@@ -44,3 +45,7 @@ Open-sourced software licensed under the [MIT license](http://opensource.org/lic
     * `Threads` run **independent of each other**.
     * **Operating System Scheduler makes scheduling decisions at thread level and not at the process level!**
     * `Threads` can run concurrently (with each thread taking turn on individual core) or in parallel (with each thread running on different cores at the same time).
+    * `Threads` communicate between each other by sharing memory.
+    * Sharing of memory between threads creates lot of complexity.
+    * Concurrent access to to shared memory by two or more threads can lead to **Data Race** and outcome can be **Un-deterministic**.
+    * The actual number of threads we can create are limited.
