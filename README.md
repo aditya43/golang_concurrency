@@ -156,3 +156,16 @@ ch := make(chan int)
 - We can specify capacity i.e. Buffer size, which indicates the number of elemenets that can be sent without the receiver being ready.
 - Sender can keep sending the values until buffer gets full. When the buffer gets full, the sender will get blocked.
 - Receiver will keep receiving values until buffer gets empty. When the buffer gets empty, the receiver will get blocked.
+
+-----------
+
+## Channel Direction:
+- When using channels as a function parameters, we can specify if a channel is meant to only send or receive values.
+- This will increase the Type Safety of our program.
+- For e.g.
+```go
+func(in <-chan string, out chan<- string) {
+    // in: This channel can only receive values of type string
+    // out: This channel can only send values of type string
+}
+```
