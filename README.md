@@ -273,3 +273,9 @@ select {
     * Communicating asynchronous results.
 - Mutex:
     * When we have data such as Caches, States, Registeries which are big to be sent over the channels and we want access to this data to be thread safe. This is where classic synchronization tool such as Mutex comes into the picture.
+
+-----------
+
+## sync.Atomic:
+- `Automic` is used to performed low level automic operations on memory. It is used by other synchonization utilities.
+- It is a `lockless` operation.
