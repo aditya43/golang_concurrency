@@ -254,3 +254,22 @@ select {
     case ch <- v:
 }
 ```
+
+-----------
+
+## Mutex:
+- Mutex is used to guard access to shared resource.
+- sync.Mutex provides exclusive access to shared resource.
+- If the Goroutine is just reading from the memory and not writing to the memory then we can use `READ WRITE MUTEX`.
+- `sync.RWMutex` allows multiple readers. Writers get exclusive lock.
+
+-----------
+
+## When to use Channels vs. When to use Mutex:
+- Channels:
+    * They are made to implement communication between Goroutines.
+    * Passing copy of data.
+    * Distributing units of work.
+    * Communicating asynchronous results.
+- Mutex:
+    * When we have data such as Caches, States, Registeries which are big to be sent over the channels and we want access to this data to be thread safe. This is where classic synchronization tool such as Mutex comes into the picture.
