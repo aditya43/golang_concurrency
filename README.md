@@ -191,3 +191,66 @@ close(ch)
 - Ensure the channels are initialized first.
 - Owner of channel is a **Goroutine that instantiates, writes and closes a channel**.
 - Channel **utilizers only have a read-only** view into the channel.
+
+-----------
+
+## Select Statement:
+- It allows us to do operations on Channel which ever is ready and don't worry about the order.
+- Select is like a `switch` statement.
+- Each statement specifies `send` or `receive` on a specific channel and it has associated block of statements.
+- Each cases specifies communication.
+- All channel operations are considered simultaneously.
+- **Select waits until some case is ready to proceed.** If none of the channels are ready, then entire Select statement is going to be blocked until some case is ready for the communication.
+- When one channel is ready, that operation will proceed.
+- If multiple channels are ready, it will pick one of the channels randomly and proceed.
+- Select is helpful for implementing:
+    * Timeouts
+    * Non-blocking communications
+- Select Statement syntax:
+```go
+select {
+    case <- ch1:
+        // Block of statements
+    case <- ch2:
+        // Block of statements
+    case ch3 <- struct{}{}:
+        // Block of statements
+}
+```
+- **We can specify timeouts on channel operations as below**.
+- In below example:
+    * Select will wait until there is event on channel ch or until timeout is reached (after 3 seconds).
+    * The `time.After()` function takes in a `time.Duration` argument and returns a channel that will send the current time after the duration we have specified.
+```go
+select {
+    case v := <- ch:
+        fmt.Println(v)
+    case <- time.After(3 * time.Second):
+        fmt.Println("Timeout!")
+}
+```
+- **As we know channels are blocking, we can implement Non-Blocking operation using `select` by specifying the `default` case**.
+- In below example:
+    * Send or receive on a channel, but avoid blocking if channel is not ready.
+    * `default` allows us to exit a `select` block without blocking.
+```go
+select {
+    case m := <- ch:
+        fmt.Println("Received message: ", m)
+    default:
+        fmt.Println("No message received")
+}
+```
+- Empty `select` statement will block forever.
+```go
+select {}
+```
+- `select` on `nil` channel will block forever.
+```go
+// Will block forever
+var ch chan string
+select {
+    case v := <- ch:
+    case ch <- v:
+}
+```
