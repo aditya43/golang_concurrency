@@ -300,3 +300,8 @@ cond := sync.NewCond(&mu)
 - Broadcast wakes all Goroutines waiting on `c`.
 
 -----------
+
+## sync.Once:
+- `sync.Once` is used to run one time initialization functions.
+- `once.Do(funcValue)` method accepts the initialization function.
+- `sync.Once` ensures that only one call to `Do` ever calls the function that is passed in - even on different Goroutines.
