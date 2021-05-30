@@ -169,3 +169,25 @@ func(in <-chan string, out chan<- string) {
     // out: This channel can only send values of type string
 }
 ```
+
+-----------
+
+## Channel Default Values And Best Practices:
+- Default value for channels is `nil`.
+```go
+var ch chan interface{}
+```
+- Reading and Writing to a `nil` channel will block forever.
+```go
+var ch chan interface{}
+<- ch
+ch <- struct{}{}
+```
+- Closing `nil` channel will `panic`.
+```go
+var ch chan interface{}
+close(ch)
+```
+- Ensure the channels are initialized first.
+- Owner of channel is a **Goroutine that instantiates, writes and closes a channel**.
+- Channel **utilizers only have a read-only** view into the channel.
