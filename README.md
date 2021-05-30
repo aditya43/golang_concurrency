@@ -140,9 +140,19 @@ value, ok = <- ch
 -----------
 
 ## Unbuffered Channels:
-- They are synchronous.
-- Receiving channel will block until there is sender and sender will block until there is receiver.
+- They are Synchronous.
+- Receiving Goroutine will block until there is sender and sender will block until there is receiver.
 - To create Unbuffered Channel:
 ```go
 ch := make(chan int)
 ```
+
+-----------
+
+## Buffered Channels:
+- They are Asynchronous.
+- They are in-memory FIFO queues.
+- There is a buffer between sender and receiver Goroutine.
+- We can specify capacity i.e. Buffer size, which indicates the number of elemenets that can be sent without the receiver being ready.
+- Sender can keep sending the values until buffer gets full. When the buffer gets full, the sender will get blocked.
+- Receiver will keep receiving values until buffer gets empty. When the buffer gets empty, the receiver will get blocked.
