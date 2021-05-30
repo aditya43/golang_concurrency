@@ -136,3 +136,13 @@ value, ok = <- ch
 - The receiver Goroutine can receive sequence of values from Channel and then it can range over those values.
 - Loop automatically breaks when Channel is closed.
 - Range does not return the second boolean value.
+
+-----------
+
+## Unbuffered Channels:
+- They are synchronous.
+- Receiving channel will block until there is sender and sender will block until there is receiver.
+- To create Unbuffered Channel:
+```go
+ch := make(chan int)
+```
