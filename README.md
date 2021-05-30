@@ -279,3 +279,24 @@ select {
 ## sync.Atomic:
 - `Automic` is used to performed low level automic operations on memory. It is used by other synchonization utilities.
 - It is a `lockless` operation.
+
+-----------
+
+## sync.Cond:
+- Condition variable is one of the synchronization mechanism.
+- It is a `lockless` operation.
+- A condition variable is basically a container of Goroutines that are waiting for a certain condition.
+- Condition variables are type:
+```go
+var c *sync.Cond
+```
+- We use constructor method `sync.NewCond()` to create a conditional variable, it takes `sync.Locker` interface as input, which is usually `sync.Mutex`.
+```go
+mu := sync.Mutex{}
+cond := sync.NewCond(&mu)
+```
+- Wait suspends the execution of Goroutine.
+- Signal wakes one Goroutine waiting on `c`.
+- Broadcast wakes all Goroutines waiting on `c`.
+
+-----------
