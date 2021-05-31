@@ -334,3 +334,18 @@ go install -race mypkg
 - When a racy behaviour is detected, a warning is printed.
 - **Race enabled binary will be 10 times slower and consumes 10 times more memory.**
 - Integration tests and Load tests are good candidates to test with binary with race enabled.
+
+-----------
+
+## Data Pipelines:
+- Go's concurrency primitives makes it easy to construct streaming pipelines that enables us to efficiently use I/O and multiple CPU cores available on the machine.
+- Pipelines are often used to process streams or batches of data.
+- Pineline is a series of stages that are connected by the channels. For e.g.
+```go
+            ch1               ch2               ch3
+Goroutine1 -----> Goroutine2 -----> Goroutine3 -----> Goroutine4
+```
+- Each stage in pipeline is represented by a Goroutine.
+- Each stage takes the data in, performs the operations on it, and then passes the data out.
+- By using pipelines, we can separate the concerns of each stage and process individual stages concurrently.
+- Stages could consume and return the same type.
