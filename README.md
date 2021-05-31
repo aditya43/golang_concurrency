@@ -359,3 +359,18 @@ Goroutine1 -----> Goroutine2 -----> Goroutine3 -----> Goroutine4
     * Multiple Goroutines read data from the same channel.
 - **Fan In**:
     * Process of combining multiple results from different channels into 1 channel.
+
+-----------
+
+## Cancellation of Goroutines:
+- Pass a read-only `done` channel to Goroutine.
+- Close the channel, to send broadcast signal to all Goroutines.
+- On receiving the signal on `done` channel, Goroutines needs to abandon their work and terminate.
+- We use `select` to make send/receive operation on channel `pre-emptible`. For e.g.
+```go
+select {
+    case out <- n:
+    case <- done:
+        return
+}
+```
