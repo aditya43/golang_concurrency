@@ -305,3 +305,8 @@ cond := sync.NewCond(&mu)
 - `sync.Once` is used to run one time initialization functions.
 - `once.Do(funcValue)` method accepts the initialization function.
 - `sync.Once` ensures that only one call to `Do` ever calls the function that is passed in - even on different Goroutines.
+
+-----------
+
+## sync.Pool:
+- `sync.Pool` is commonly used for creation of expensive resources. For e.g. database connections, network connections and memory.
