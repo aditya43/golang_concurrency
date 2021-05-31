@@ -54,7 +54,7 @@ func setupPipeLine(root string) error {
 		if r.err != nil {
 			return r.err
 		}
-		saveThumbnail(r.srcImagePath, r.thumbnailImage)
+		_ = saveThumbnail(r.srcImagePath, r.thumbnailImage)
 	}
 
 	// check for error on the channel, from walkfiles stage.
