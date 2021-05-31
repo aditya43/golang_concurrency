@@ -349,3 +349,13 @@ Goroutine1 -----> Goroutine2 -----> Goroutine3 -----> Goroutine4
 - Each stage takes the data in, performs the operations on it, and then passes the data out.
 - By using pipelines, we can separate the concerns of each stage and process individual stages concurrently.
 - Stages could consume and return the same type.
+
+-----------
+
+## Fan Out & Fan In:
+- Fan Out and Fan In helps us break computationally intesive stage (Goroutine) in our Pipeline into multiple Goroutines and run them in parallel to speed it up.
+- **Fan Out**:
+    * Multiple Goroutines are started to read data from the single channel.
+    * Multiple Goroutines read data from the same channel.
+- **Fan In**:
+    * Process of combining multiple results from different channels into 1 channel.
