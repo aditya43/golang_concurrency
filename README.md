@@ -310,3 +310,27 @@ cond := sync.NewCond(&mu)
 
 ## sync.Pool:
 - `sync.Pool` is commonly used for creation of expensive resources. For e.g. database connections, network connections and memory.
+
+-----------
+
+## Go Race Detector:
+- Go provides race detector tool for finding race conditions in Go code.
+- Race detector tool is integrated with other Go tools.
+- We can use race detector tool as follows:
+```sh
+# Test the package for race conditions
+go test -race mypkg
+
+# Compile and run the program and check for race conditions
+go run -race myprog.go
+
+# Build Go code and check for race conditions
+go build -race myprog
+
+# Install the package
+go install -race mypkg
+```
+- The binary builds need to be race enabled to run race tool.
+- When a racy behaviour is detected, a warning is printed.
+- **Race enabled binary will be 10 times slower and consumes 10 times more memory.**
+- Integration tests and Load tests are good candidates to test with binary with race enabled.
