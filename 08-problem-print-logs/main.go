@@ -126,16 +126,37 @@ func sortLogsByHits() {
 	})
 }
 
-// Print output
-func printOutput() {
+// Sort logs by hits count (Desc) and print the output
+func sortLogsByHitsAndPrint() {
+	fmt.Println("Sorted output by hits count:")
+	fmt.Println("+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+")
 	fmt.Printf("%-10s %-20s %-10s %-10s\n", "Method", "Endpoint", "Status", "Hits")
 	fmt.Println("+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+")
-	// for _, log := range logs {
-	// 	fmt.Printf("%-10s %-20s %-10s %-10d\n", log.method, log.endpoint, log.status, log.hit_count)
-	// }
+
+	sortLogsByHits()
 	for _, logKey := range sortedLogKeys {
 		fmt.Printf("%-10s %-20s %-10s %-10d\n", logs[logKey].method, logs[logKey].endpoint, logs[logKey].status, logs[logKey].hit_count)
 	}
+	fmt.Println("+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+")
+
+	actUsers := "Active Users: "
+	for uid := range activeUsers {
+		actUsers += fmt.Sprintf("%d, ", uid)
+	}
+	fmt.Println(actUsers[:len(actUsers)-2])
+}
+
+// Print unsorted output
+func printUnsortedOutput() {
+	fmt.Println("\n\nUnsorted output:")
+	fmt.Println("+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+")
+	fmt.Printf("%-10s %-20s %-10s %-10s\n", "Method", "Endpoint", "Status", "Hits")
+	fmt.Println("+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+")
+
+	for _, log := range logs {
+		fmt.Printf("%-10s %-20s %-10s %-10d\n", log.method, log.endpoint, log.status, log.hit_count)
+	}
+
 	fmt.Println("+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+")
 
 	actUsers := "Active Users: "
@@ -161,22 +182,40 @@ func main() {
 		"[20-03-2021:01:22:32] POST /logout 200\n"
 
 	processLogs(getLogEntries(logs))
-	sortLogsByHits()
-	printOutput()
+	sortLogsByHitsAndPrint()
+	printUnsortedOutput()
 }
 
 // Output:
 /*
+Sorted output by hits count:
++-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
 Method     Endpoint             Status     Hits
 +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
 GET        /users/#             200        3
-POST       /users/#             200        2
 GET        /cart                200        2
+POST       /users/#             200        2
 GET        /orders              200        1
+POST       /logout              200        1
 POST       /users               201        1
 DELETE     /users/#             200        1
-POST       /logout              200        1
 GET        /users/#/friends     200        1
 +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
-Active Users: 64, 12, 15, 55, 13, 16
+Active Users: 15, 13, 64, 55, 16, 12
+
+
+Unsorted output:
++-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+Method     Endpoint             Status     Hits
++-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+POST       /users/#             200        2
+DELETE     /users/#             200        1
+GET        /users/#/friends     200        1
+GET        /cart                200        2
+GET        /orders              200        1
+POST       /logout              200        1
+POST       /users               201        1
+GET        /users/#             200        3
++-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+Active Users: 15, 13, 64, 55, 16, 12
 */
